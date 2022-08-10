@@ -1,11 +1,10 @@
+from typing import Optional
 
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
 import time
 import psycopg2
-
-from listenbrainz import config
 
 # The schema version of the timescale database (tables created
 # from ./admin/timescale/create-tables.sql). This includes user playlists
@@ -15,7 +14,7 @@ from listenbrainz import config
 # public dump
 SCHEMA_VERSION_TIMESCALE = 7
 
-engine = None
+engine: Optional[sqlalchemy.engine.Engine] = None
 
 DUMP_DEFAULT_THREAD_COUNT = 4
 
