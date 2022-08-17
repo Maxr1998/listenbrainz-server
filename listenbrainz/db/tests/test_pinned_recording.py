@@ -108,7 +108,7 @@ class PinnedRecDatabaseTestCase(DatabaseTestCase, TimescaleTestCase):
         ]
 
         submitted_data = msb_db.insert_all_in_transaction(recordings)
-        msids = [x["ids"]["recording_msid"] for x in submitted_data]
+        msids = [x["msid"] for x in submitted_data]
 
         with ts.engine.connect() as connection:
             query = """
