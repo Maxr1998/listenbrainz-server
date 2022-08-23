@@ -74,7 +74,7 @@ class TimescaleWriterSubscriber(ConsumerProducerMixin):
                 'title': listen['track_metadata']['track_name'],
             }
             if 'release_name' in listen['track_metadata']:
-                messy_dict['release'] = listen['track_metadata']['release_name']
+                messy_dict['release'] = str(listen['track_metadata']['release_name'])
 
             if 'additional_info' in listen['track_metadata']:
                 ai = listen['track_metadata']['additional_info']
