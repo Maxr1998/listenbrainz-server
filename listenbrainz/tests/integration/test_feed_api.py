@@ -72,7 +72,7 @@ class FeedAPITestCase(ListenAPIIntegrationTestCase):
 
         # This sleep allows for the timescale subscriber to take its time in getting
         # the listen submitted from redis and writing it to timescale.
-        time.sleep(1)
+        time.sleep(0.5)
 
         response = self.client.get(
             url_for('user_timeline_event_api_bp.user_feed', user_name=self.main_user['musicbrainz_id']),
@@ -124,7 +124,7 @@ class FeedAPITestCase(ListenAPIIntegrationTestCase):
             self.assert200(response)
             self.assertEqual(response.json['status'], 'ok')
 
-        time.sleep(1)
+        time.sleep(0.5)
 
         # max_ts = 2, should have sent back 2 listens
         r = self.client.get(
@@ -294,7 +294,7 @@ class FeedAPITestCase(ListenAPIIntegrationTestCase):
         new_user_1 = db_user.get_or_create(104, 'new_user_1')
         db_user_relationship.insert(self.following_user_1['id'], new_user_1['id'], 'follow')
 
-        time.sleep(1)  # sleep a bit to avoid ordering conflicts, cannot mock this time as it comes from postgres
+        time.sleep(0.5)  # sleep a bit to avoid ordering conflicts, cannot mock this time as it comes from postgres
 
         # create a recording recommendation for a user we follow
         db_user_timeline_event.create_user_track_recommendation_event(
@@ -307,7 +307,7 @@ class FeedAPITestCase(ListenAPIIntegrationTestCase):
             )
         )
 
-        time.sleep(1)
+        time.sleep(0.5)
 
         r = self.client.get(
             url_for('user_timeline_event_api_bp.user_feed', user_name=self.main_user['musicbrainz_id']),
