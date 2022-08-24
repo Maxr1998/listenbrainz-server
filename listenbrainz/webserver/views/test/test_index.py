@@ -173,9 +173,9 @@ class IndexViewsTestCase(ServerTestCase, DatabaseTestCase):
 
         mock_user_get.return_value = user
 
-        @self.app.route('/page_that_returns_500')
+        @self.app.route('/page_that_returns_500_2')
         @login_required
-        def view500():
+        def view500_2():
             # flask-login user is loaded during @login_required, so check that the db has been queried
             mock_user_get.assert_called_with(user['login_id'])
             raise InternalServerError('error')
