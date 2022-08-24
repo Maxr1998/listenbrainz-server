@@ -154,10 +154,10 @@ class StatsDatabaseTestCase(DatabaseTestCase):
             stats=StatRange[ListeningActivityRecord](**listening_activity_data_year)
         )
 
-        result = db_stats.get_user_listening_activity(1, 'all_time')
+        result = db_stats.get_user_listening_activity(self.user['id'], 'all_time')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), listening_activity_data)
 
-        result = db_stats.get_user_listening_activity(1, 'year')
+        result = db_stats.get_user_listening_activity(self.user['id'], 'year')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), listening_activity_data_year)
 
     def test_insert_user_stats_mult_ranges_daily_activity(self):
@@ -176,10 +176,10 @@ class StatsDatabaseTestCase(DatabaseTestCase):
             stats=StatRange[DailyActivityRecord](**daily_activity_data_year)
         )
 
-        result = db_stats.get_user_daily_activity(1, 'all_time')
+        result = db_stats.get_user_daily_activity(self.user['id'], 'all_time')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), daily_activity_data)
 
-        result = db_stats.get_user_daily_activity(1, 'year')
+        result = db_stats.get_user_daily_activity(self.user['id'], 'year')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), daily_activity_data_year)
 
     def test_insert_user_stats_mult_ranges_artist_map(self):
@@ -198,10 +198,10 @@ class StatsDatabaseTestCase(DatabaseTestCase):
             stats=StatRange[UserArtistMapRecord](**artist_map_data_year)
         )
 
-        result = db_stats.get_user_artist_map(1, 'all_time')
+        result = db_stats.get_user_artist_map(self.user['id'], 'all_time')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), artist_map_data)
 
-        result = db_stats.get_user_artist_map(1, 'year')
+        result = db_stats.get_user_artist_map(self.user['id'], 'year')
         self.assertDictEqual(result.dict(exclude={'user_id', 'last_updated', 'count'}), artist_map_data_year)
 
     def test_insert_sitewide_artists(self):
