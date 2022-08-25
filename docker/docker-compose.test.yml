@@ -31,7 +31,15 @@ services:
       - redis
       - lb_db
       - rabbitmq
- 
+
+  timescale_writer:
+    image: listenbrainz
+    command: python3 -m "listenbrainz.timescale_writer.timescale_writer"
+    depends_on:
+      - redis
+      - lb_db
+      - rabbitmq
+
   frontend_tester:
     build:
       context: ..
