@@ -53,8 +53,10 @@ def check_ratelimit_token_whitelist(auth_token):
     """
         Check to see if the given auth_token is a whitelisted auth token.
     """
-
     from flask import current_app
+    # disable ratelimit during tests
+    if current_app.config["TESTING"]:
+        return True
     return auth_token in current_app.config["WHITELISTED_AUTH_TOKENS"]
 
 
@@ -129,6 +131,7 @@ def create_app(debug=None):
 
     from brainzutils.ratelimit import inject_x_rate_headers, set_user_validation_function
     set_user_validation_function(check_ratelimit_token_whitelist)
+
     @app.after_request
     def after_request_callbacks(response):
         return inject_x_rate_headers(response)
